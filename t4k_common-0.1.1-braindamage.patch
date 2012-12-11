@@ -1,0 +1,16 @@
+--- t4k_common-0.1.1/src/t4k_menu.c.bero	2012-12-04 22:55:04.476831600 +0100
++++ t4k_common-0.1.1/src/t4k_menu.c	2012-12-04 22:55:43.170176963 +0100
+@@ -870,11 +870,11 @@ int T4K_RunMenu(int index, bool return_c
+               SDL_FreeSurface(desc_prerendered);
+ 	      desc_prerendered = NULL;
+               if(desc == NULL)
+-                desc = "";
++                desc = strdup("");
+ 	      char_width = desc_chars_per_line(T4K_TOOLTIP_FONTSIZE);
+               T4K_LineWrapInsBreaks(desc, out, char_width, 64, 64);
+       //        desc_prerendered = T4K_SimpleText(out, T4K_TOOLTIP_FONTSIZE, &yellow);
+-              if (desc != "")
++              if (desc && strlen(desc))
+                 desc_prerendered = T4K_BlackOutline(out, T4K_TOOLTIP_FONTSIZE, &yellow);
+ 	    }
+ 
