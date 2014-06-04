@@ -47,6 +47,7 @@ Static library files for the Tux4Kids common library
 %apply_patches
 
 %build
+autoreconf -fi
 %configure
 %make
 
