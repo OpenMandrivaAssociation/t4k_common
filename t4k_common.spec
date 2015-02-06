@@ -8,7 +8,7 @@ Summary: Files used by all Tux4Kids applications/games
 
 Group: System/Libraries
 Source0: http://alioth.debian.org/frs/download.php/3540/t4k_common-%{version}.tar.gz
-Release: 3
+Release: 4
 License: LGPLv3
 Patch0: t4k_common-0.1.1-braindamage.patch
 Patch1: t4k_common-0.1.1-libpng-1.5.patch
