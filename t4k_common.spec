@@ -45,7 +45,7 @@ Development files for the Tux4Kids common library
 
 %prep
 %setup
-%apply_patches
+%autopatch -p1
 
 %build
 autoreconf -fi
