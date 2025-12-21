@@ -13,6 +13,11 @@ License: LGPLv3
 Patch0: t4k_common-0.1.1-braindamage.patch
 Patch1: t4k_common-0.1.1-libpng-1.5.patch
 Requires: %lib = %{version}-%{release}
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires: pkgconfig(SDL_Pango)
 BuildRequires: pkgconfig(SDL_image)
 BuildRequires: pkgconfig(librsvg-2.0)
