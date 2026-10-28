@@ -60,6 +60,8 @@ sed -i '/^#ifndef bool$/,/^#endif$/c #include <stdbool.h>' src/t4k_common.h
 sed -i 's/set_font_size();/set_font_size(bool uniform);/' src/t4k_menu.c
 # node->children is an xmlNode, not an xmlAttr.
 sed -i 's/xmlAttr \*current, \*child;/xmlAttr *current; xmlNode *child;/' src/t4k_menu.c
+# The header and t4k_linewrap.c both define this array. -fno-common rejects that.
+sed -i 's/^char wrapped_lines\[MAX_LINES\]\[MAX_LINEWIDTH\];/extern char wrapped_lines[MAX_LINES][MAX_LINEWIDTH];/' src/t4k_common.h
 
 %build
 # Pointer types in the menu callbacks do not match. Keep those as warnings.
