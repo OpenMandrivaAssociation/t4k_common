@@ -51,6 +51,9 @@ Development files for the Tux4Kids common library
 %prep
 %setup
 %autopatch -p1
+# The bundled header hides u8_mbtouc_unsafe unless this gnulib
+# module macro is set. linebreak.c calls it either way.
+sed -i 's/#ifdef GNULIB_UNISTR_U8_MBTOUC_UNSAFE/#if 1/' src/linebreak/unistr.h
 
 %build
 autoreconf -fi
