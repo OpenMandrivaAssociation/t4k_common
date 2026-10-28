@@ -54,14 +54,23 @@ Development files for the Tux4Kids common library
 # The bundled header hides u8_mbtouc_unsafe unless this gnulib
 # module macro is set. linebreak.c calls it either way.
 sed -i 's/#ifdef GNULIB_UNISTR_U8_MBTOUC_UNSAFE/#if 1/' src/linebreak/unistr.h
+# C23 made true and false keywords, so the local enum is illegal.
+sed -i '/^#ifndef bool$/,/^#endif$/c #include <stdbool.h>' src/t4k_common.h
+# An empty parameter list is (void) in C23. The definition takes a bool.
+sed -i 's/set_font_size();/set_font_size(bool uniform);/' src/t4k_menu.c
+# node->children is an xmlNode, not an xmlAttr.
+sed -i 's/xmlAttr \*current, \*child;/xmlAttr *current; xmlNode *child;/' src/t4k_menu.c
 
 %build
+# Pointer types in the menu callbacks do not match. Keep those as warnings.
+export CFLAGS="%{optflags} -Wno-error=incompatible-pointer-types -Wno-error=incompatible-function-pointer-types -Wno-error=int-conversion"
 autoreconf -fi
 %configure --disable-static
-%make
+# Generated libtool is a no-op after slibtoolize. Link with slibtool.
+%make LIBTOOL=slibtool-shared
 
 %install
-%makeinstall_std
+%makeinstall_std LIBTOOL=slibtool-shared
 
 %files
 %{_datadir}/%{name}
